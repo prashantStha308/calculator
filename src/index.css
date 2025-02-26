@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+.main-app{
+  @apply  flex justify-center items-center bg-gray-800 text-gray-200 min-h-screen w-screen;
+}
+
+.calculator{
+  @apply w-full max-w-min p-2 rounded-lg bg-gray-900;
+}
