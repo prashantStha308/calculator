@@ -3,6 +3,9 @@ class calculator{
     constructor(){
         this.expression = [];
         this.history = JSON.parse(localStorage.getItem("calculatorHistory") ) || [];
+        
+        // make the cursor hold the place of last element at default
+        this.cursor = this.expression.length - 1;
 
         while( this.history.length > 7 ){
             this.history.shift();
@@ -15,13 +18,23 @@ class calculator{
     getHistory(){
         return this.history;
     }
+    getCursor(){
+        return this.cursor;
+    }
+
     /*** Setters ***/
+    setCursor( index ){
+        this.cursor = index;
+    }
+
     appendDigit( digit ){
         if( digit === "00" && this.expression.length === 0 ){
             this.expression.push(0);
         }else{
             this.expression.push( String(digit) )
         }
+        // later stages, we can add elements to the index stored by the cursor variable
+        // like: this.expression.splice( cursor , 0 , digit )
     }
 
     clearExpression(){
@@ -30,8 +43,10 @@ class calculator{
 
     /***  Operations ***/
     backspace(){
-        console.log(this.expression.pop());
-        this.updateLocalStorage( this.expression ); //remove this in next sitting
+        // remove the latest expression
+        this.expression.pop();
+        // in later stage, we can remove the element from the point where cursor is placed.
+        // like , this.expression.splice( cursor , 1 );
     }
 
     evaluate(){
