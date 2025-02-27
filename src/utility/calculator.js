@@ -17,7 +17,11 @@ class calculator{
     }
     /*** Setters ***/
     appendDigit( digit ){
-        this.expression.push( String(digit) );
+        if( digit === "00" && this.expression.length === 0 ){
+            this.expression.push(0);
+        }else{
+            this.expression.push( String(digit) )
+        }
     }
 
     clearExpression(){
@@ -27,12 +31,16 @@ class calculator{
     /***  Operations ***/
     backspace(){
         console.log(this.expression.pop());
-        console.log( "Expression" , this.expression );
-        this.updateLocalStorage( this.expression );
+        this.updateLocalStorage( this.expression ); //remove this in next sitting
     }
 
     evaluate(){
-        const joinedExp = this.expression.join("");
+        if( this.expression.length === 0 ) return 0;
+
+        let joinedExp = this.expression.join("");
+        // remove the leading zero if present
+        joinedExp = joinedExp.replace(/\b0+(\d+)/g,"$1");
+
         this.updateLocalStorage( this.expression );
         let res;
         if( joinedExp.includes("/0") ){

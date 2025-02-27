@@ -7,3 +7,16 @@
 .calculator{
   @apply w-full max-w-min p-2 rounded-lg bg-gray-900;
 }
+
+.cursor{
+  margin: 0;
+  animation: cursor-pulse 500ms ease-in-out alternate infinite;
+}
+
+@keyframes cursor-pulse{
+  from{
+    opacity: 0.8;
+  }to{
+    opacity: 0.2;
+  }
+}
