@@ -5,13 +5,18 @@ class calculator{
         this.history = JSON.parse(localStorage.getItem("calculatorHistory") ) || [];
 
         while( this.history.length > 7 ){
-            console.log("hmm");
             this.history.shift();
         }
     }
-
+    /***  Getters ***/
+    getExpression(){
+        return this.expression;
+    }
+    getHistory(){
+        return this.history;
+    }
+    /*** Setters ***/
     appendDigit( digit ){
-        console.log(digit);
         this.expression.push( String(digit) );
     }
 
@@ -19,23 +24,30 @@ class calculator{
         this.expression = [];
     }
 
-    evaluate(){
-        console.log(this.expression);
-
+    /***  Operations ***/
+    backspace(){
+        console.log(this.expression.pop());
+        console.log( "Expression" , this.expression );
         this.updateLocalStorage( this.expression );
-        const res = eval( this.expression.join("") );
+    }
 
-        this.expression = [];
-
+    evaluate(){
+        const joinedExp = this.expression.join("");
+        this.updateLocalStorage( this.expression );
+        let res;
+        if( joinedExp.includes("/0") ){
+            this.clearExpression();
+            return "∞";
+        }
+        res = eval( joinedExp );
+        this.expression = [res];
         return res;
+
     }
 
-    getHistory(){
-        return this.history;
-    }
-
+    /*** Memory ***/
     updateLocalStorage(item){
-        this.history.push(item);
+        this.history.push(item.join(""));
         localStorage.setItem( "calculatorHistory" , JSON.stringify(this.history) );
     }
 

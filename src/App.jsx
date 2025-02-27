@@ -6,7 +6,6 @@ import calc from "./utility/calculator.js";
 const App = () => {
   const [ input , setInput ] = useState([]);
   const [ history , setHistory ] = useState([]);
-  console.log(input);
 
   const updateHistory = ()=>{
     setHistory(calc.getHistory().slice(-4));
