@@ -1,6 +1,17 @@
 /* eslint-disable react/prop-types */
 
+import { useEffect, useRef } from "react"
+
 const Screen = ({ input , history=[] }) => {
+
+  const textref = useRef(null);
+
+  useEffect( ()=>{
+    if( textref.current ){
+      textref.current.scrollLeft = textref.current.scrollWidth;
+    }
+  } , [input] );
+
 
   return (
     <section className="grid gap-2 max-w-sm min-h-32 px-4 py-2" >
@@ -16,7 +27,7 @@ const Screen = ({ input , history=[] }) => {
         </ul>
 
         <div
-          className="text-gray-100 text-lg text-right w-full overflow-x-scroll relative"
+          className="text-gray-100 text-lg text-right w-full overflow-x-auto relative"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           <p className="whitespace-nowrap">
