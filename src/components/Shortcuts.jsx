@@ -3,7 +3,7 @@ const Shortcuts = () => {
     const shortcuts= [
         {
             keys: [ 'E' ],
-            action: "Expand Calculator"
+            action: "Expand/Shrink Calculator"
         },
         {
             keys: [ 'W' , '↑' ],
