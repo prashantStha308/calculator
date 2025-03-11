@@ -4,23 +4,21 @@ import Button from "./Button";
 import { IoBackspaceOutline } from "react-icons/io5";
 import { FaExpandAlt } from "react-icons/fa";
 import { AiOutlineShrink } from "react-icons/ai";
-import { useState } from "react";
 
-const Pad = ({ setInput, updateHistory }) => {
+const Pad = ({ input , setInput, updateHistory , advancedMode , setAdvancedMode , setHistoryIndex  }) => {
 
-  const [ advancedMode , setAdvancedMode ] = useState(false);
   const toggleAdvancedMode = ()=> setAdvancedMode(!advancedMode);
 
   const backspace = {
-    element: <IoBackspaceOutline key={crypto.randomUUID()} className="text-2xl" />,
+    element: <IoBackspaceOutline key={"backspace"} className="text-2xl" />,
     name: "backspace"
   };
   const expand = {
-    element: <FaExpandAlt key={crypto.randomUUID()} className="text-xl" />,
+    element: <FaExpandAlt key={"expand"} className="text-xl" />,
     name: "expand"
   };
   const shrink = {
-    element: <AiOutlineShrink key={crypto.randomUUID()} className="text-2xl" />,
+    element: <AiOutlineShrink key={"shrink"} className="text-2xl" />,
     name: "shrink"
   };
   const xPowY = {
@@ -43,7 +41,7 @@ const Pad = ({ setInput, updateHistory }) => {
     [ xPowY , 'lg' , 'ln' , '(' , ')' ],
     [ '√x' , 'AC' , backspace , '%', '÷' ],
     [ 'x!' , 7, 8, 9, 'x' ],
-    [ '⅓' , 4 , 5 , 6 , '-' ],
+    [ '½' , 4 , 5 , 6 , '-' ],
     [ 'π' , 1 , 2 , 3 , '+' ],
     [ shrink , 'e' , 0 , '.' , '=' ]
   ];
@@ -59,7 +57,7 @@ const Pad = ({ setInput, updateHistory }) => {
               <tr key={rowIndex}>
                 {row.map((sym, colIndex) => (
                   <td key={`${sym}-${rowIndex}-${colIndex}`}>
-                    <Button item={sym} setInput={setInput} updateHistory={updateHistory} toggleAdvancedMode={ toggleAdvancedMode } />
+                    <Button input={input} item={sym} setInput={setInput} updateHistory={updateHistory} toggleAdvancedMode={ toggleAdvancedMode } setHistoryIndex={setHistoryIndex} history={history} />
                   </td>
                 ))}
               </tr>
@@ -69,7 +67,7 @@ const Pad = ({ setInput, updateHistory }) => {
               <tr key={rowIndex}>
                 {row.map((sym, colIndex) => (
                   <td key={`${sym}-${rowIndex}-${colIndex}`}>
-                    <Button item={sym} setInput={setInput} updateHistory={updateHistory} toggleAdvancedMode={ toggleAdvancedMode } />
+                    <Button item={sym} setInput={setInput} updateHistory={updateHistory} toggleAdvancedMode={ toggleAdvancedMode } setHistoryIndex={setHistoryIndex} history={history} />
                   </td>
                 ))}
               </tr>

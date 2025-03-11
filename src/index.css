@@ -9,7 +9,7 @@
 }
 
 .cursor{
-  margin: 0;
+  @apply absolute right-1 top-0 select-none;
   animation: cursor-pulse 500ms ease-in-out alternate infinite;
 }
 
@@ -19,4 +19,30 @@
   }to{
     opacity: 0.2;
   }
+}
+
+.shortcut-keys{
+  @apply bg-amber-500 p-2 rounded-sm mr-1;
+}
+
+input[ type="number" ]::-webkit-scrollbar-track {
+  display: none;
+}
+
+#history-list::-webkit-scrollbar {
+  width: 3px;
+}
+
+#history-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#history-list::-webkit-scrollbar-thumb {
+  background-color: rgba(30, 41, 57, 0); 
+  border-radius: 2rem;
+}
+
+#history-list:hover::-webkit-scrollbar-thumb {
+  background-color: rgb(30, 41, 57);
+  border-radius: 2rem;
 }

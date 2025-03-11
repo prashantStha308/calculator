@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import calc from "../utility/calculator.js";
 
-const Button = ({ item , setInput , updateHistory , toggleAdvancedMode }) => {
+const Button = ({ input , item , setInput , updateHistory , toggleAdvancedMode , setHistoryIndex , history }) => {
 
   const handelObjectButtons = ( element ) => {
     switch( element.name ){
@@ -17,8 +17,8 @@ const Button = ({ item , setInput , updateHistory , toggleAdvancedMode }) => {
         toggleAdvancedMode();
         break;
       case "xPowY":
-        // perform logic, need to create a span element with a sup element as it's child. Like: <span> x<sup>y</sup> </span>, in backend, use Math.pow( x , y )
-        // seems like we can store the whole function in input as eval will evalualte even that function
+        calc.appendDigit("^");
+        setInput( prev => [...prev , "^" , " " ] );
         break;
     }
   }
@@ -29,6 +29,8 @@ const Button = ({ item , setInput , updateHistory , toggleAdvancedMode }) => {
       const result = calc.evaluate();
       setInput([result]);
       updateHistory();
+      setHistoryIndex( history.length - 1 )
+      console.log( "History Index:", history.length );
 
     }
     else if( typeof(item) === 'object' ){
@@ -40,9 +42,13 @@ const Button = ({ item , setInput , updateHistory , toggleAdvancedMode }) => {
       if (item === "x") value = "*";
       if (item === "÷") value = "/";
 
-      calc.appendDigit(value);
+      if( item === "sin" || item === "cos" || item === "tan" || item === "ln" || item === "lg" ){
+        value = item + "(";
+      }
 
-      setInput( prev => [...prev , item] );
+      calc.appendDigit(value);
+      setInput( prev => [...prev , value] );
+
       if ( item === 'AC' ){
         setInput([]);
         calc.clearExpression();
